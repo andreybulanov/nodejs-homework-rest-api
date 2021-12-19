@@ -2,13 +2,13 @@ const router = require('express').Router();
 
 const { contacts: ctrl } = require('../../controllers/index');
 const { joiContactsSchema, favoriteSchema } = require('../../models/contact');
-const { validation } = require('../../middleware/index');
+const { auth, validation } = require('../../middleware/index');
 
-router.get('/', ctrl.getAll);
+router.get('/', auth, ctrl.getAll);
 
 router.get('/:contactId', ctrl.getId);
 
-router.post('/', validation(joiContactsSchema), ctrl.addContact);
+router.post('/', auth, validation(joiContactsSchema), ctrl.addContact);
 
 router.delete('/:contactId', ctrl.removeById);
 
