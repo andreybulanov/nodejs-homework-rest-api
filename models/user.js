@@ -26,10 +26,14 @@ const userSchema = Schema({
     type: String,
     default: null,
   },
+  avatarURL: {
+    type: String,
+    required: true,
+  },
 }, { versionKey: false, timestamps: true });
 
 userSchema.methods.setPassword = function (password) {
-    this.password = bcrypt.hashSync(password, bcrypt.getSaltSync(10));
+    this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 }
 
 userSchema.methods.comparePassword = function (password) {
