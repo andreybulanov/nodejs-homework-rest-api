@@ -1,8 +1,7 @@
 const { Unauthorized } = require('http-errors');
 const { User } = require('../../models');
 const jwt = require('jsonwebtoken');
-// const { SECRET_KEY } = process.env;
-const key = process.env.SECRET_KEY;
+const { SECRET_KEY } = process.env;
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -16,7 +15,7 @@ const login = async (req, res) => {
         id: user._id
     };
 
-    const token = jwt.sign(payload, key, { expiresIn: '1h' });
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
     await User.findByIdAndUpdate(user._id, { token });
 
     res.json({

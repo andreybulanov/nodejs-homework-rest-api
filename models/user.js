@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const Joi = require('joi');
 const { Schema, model } = require('mongoose');
+const Joi = require('joi');
+const bcrypt = require('bcryptjs');
 
 const userSchema = Schema({
   name: {
@@ -51,10 +51,10 @@ const joiLoginSchema = Joi.object({
     password: Joi.string().min(6).required(),
 });
 
-const User = model('user', userSchema)
+const User = model('user', userSchema);
 
 module.exports = {
-    joiUserSchema,
-    User,
-    joiLoginSchema,
-}
+  joiUserSchema,
+  User,
+  joiLoginSchema,
+};
